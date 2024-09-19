@@ -1,0 +1,4 @@
+numpy<2
+pandas
+nfl_data_py
+openpyxl
