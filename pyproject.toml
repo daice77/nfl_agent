@@ -8,6 +8,10 @@ packages = [
     { include = "nfl_agent", from = "src" }
 ]
 
+[tool.poetry.scripts]
+nfl_agent = "nfl_agent.main:main"
+
+
 [tool.poetry.dependencies]
 python = "^3.12"
 appdirs = "*"
@@ -15,6 +19,8 @@ fastparquet = { version = "*", python = ">=3.7" }
 numpy = ">=1.0,<2.0"
 pandas = ">=1.0,<2.0"
 XlsxWriter = "*"
+langchain = "^0.3.0"
+langchain-community = "^0.3.0"
 
 [tool.poetry.dev-dependencies]
 black = "^24.8.0"
