@@ -20,8 +20,10 @@ def import_and_clean_data(import_func, data_type, *args, **kwargs):
             print(f"Columns in {data_type}:")
             for col in data.columns:
                 print(
-                    f"Column: {col}, Type: {data[col].dtype}, Example Values: {data[col].unique()[:5]}"
+                    f"Column: {col}, Type: {data[col].dtype}, "
+                    f"Example Values: {list(data[col].unique()[:5])}"
                 )
+
         return data_cleaned
     except Exception as e:
         print(f"Error importing {data_type}: {e}")
@@ -189,33 +191,42 @@ print(f"Data exported to {file_path}")
 
 
 # Function to generate a team roster report
+# Function to generate a team roster report
 def team_roster(data, team_name):
     team_data = data[data["recent_team"] == team_name]
     print(f"Team: {team_name}")
     print("=" * 40)
+
     for _, row in team_data.iterrows():
         print(f"Player: {row['player_name']}")
         print(f"  Position: {row['position_x']} | Weeks Played: {row['weeks_played']}")
         print(
-            f"  Passing: {row['completions']} completions, {row['passing_yards']} yards, {row['passing_tds']} TDs"
+            f"  Passing: {row['completions']} completions, "
+            f"{row['passing_yards']} yards, {row['passing_tds']} TDs"
         )
         print(
-            f"  Rushing: {row['carries']} carries, {row['rushing_yards']} yards, {row['rushing_tds']} TDs"
+            f"  Rushing: {row['carries']} carries, "
+            f"{row['rushing_yards']} yards, {row['rushing_tds']} TDs"
         )
         print(
-            f"  Receiving: {row['receptions']} receptions, {row['receiving_yards']} yards, {row['receiving_tds']} TDs"
+            f"  Receiving: {row['receptions']} receptions, "
+            f"{row['receiving_yards']} yards, {row['receiving_tds']} TDs"
         )
         print(f"  Fantasy Points: {row['fantasy_points_ppr']} PPR")
         print(
-            f"  Offensive Snaps: {row['offense_snaps']} | Offensive Snap Percentage: {row['offense_pct']}%"
+            f"  Offensive Snaps: {row['offense_snaps']} | "
+            f"Offensive Snap Percentage: {row['offense_pct']}%"
         )
         print(
-            f"  Defensive Snaps: {row['defense_snaps']} | Defensive Snap Percentage: {row['defense_pct']}%"
+            f"  Defensive Snaps: {row['defense_snaps']} | "
+            f"Defensive Snap Percentage: {row['defense_pct']}%"
         )
         print(
-            f"  Special Teams Snaps: {row['st_snaps']} | Special Teams Snap Percentage: {row['st_pct']}%"
+            f"  Special Teams Snaps: {row['st_snaps']} | "
+            f"Special Teams Snap Percentage: {row['st_pct']}%"
         )
         print("-" * 40)
+
     print("\n")
 
 

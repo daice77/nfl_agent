@@ -29,11 +29,13 @@ def fetch_and_save_data(fetch_function, writer, *args, **kwargs):
         cleaned_data.to_excel(writer, sheet_name=sheet_name, index=False)
 
         print(f"[{fetch_function.__name__}] Number of rows fetched: {num_rows_fetched}")
+
         if DUMP_COLUMNS:
             print(f"\nTABLE DUMP - Columns in {fetch_function}:", file=sys.stderr)
             for col in cleaned_data.columns:
                 print(
-                    f"Column: {col}, Type: {cleaned_data[col].dtype}, Example Values: {[v for v in cleaned_data[col].unique()[:5]]}",
+                    f"Column: {col}, Type: {cleaned_data[col].dtype}, "
+                    f"Example Values: {list(cleaned_data[col].unique()[:5])}",
                     file=sys.stderr,
                 )
 

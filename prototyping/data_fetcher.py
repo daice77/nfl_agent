@@ -62,12 +62,12 @@ weekly_data = import_and_clean_data(
 
 # Import and clean data
 players = import_and_clean_data(nfl.import_players, "Players")
-# team_desc = import_and_clean_data(nfl.import_team_desc, "Team Descriptions")
-# seasons = import_and_clean_data(nfl.import_seasonal_data, "Season Data", [YEAR], "ALL")
-# roster = import_and_clean_data(nfl.import_seasonal_rosters, "Season Roster", [YEAR])
+team_desc = import_and_clean_data(nfl.import_team_desc, "Team Descriptions")
+seasons = import_and_clean_data(nfl.import_seasonal_data, "Season Data", [YEAR], "ALL")
+roster = import_and_clean_data(nfl.import_seasonal_rosters, "Season Roster", [YEAR])
 roster = import_and_clean_data(nfl.import_weekly_rosters, "Weekly Roster", [YEAR])
 # snaps = import_and_clean_data(nfl.import_snap_counts, "Snaps", [YEAR])
-# ids = import_and_clean_data(nfl.import_ids, "Player IDs")
+ids = import_and_clean_data(nfl.import_ids, "Player IDs")
 
 exit()
 # Convert birth_date in both dataframes to datetime format
@@ -168,6 +168,7 @@ def team_roster(data, team_name):
             continue
         print(f"Team: {team}")
         print("=" * 40)
+
         for _, row in data.iterrows():
             print(
                 f"Player: {row['player_name']} (Jersey Number: {int(row['jersey_number'])})"
@@ -177,25 +178,33 @@ def team_roster(data, team_name):
             print(f"  College: {row['college']}, Experience: {row['years_exp']} years")
             print(f"  Status: {row['status']}")
             print(
-                f"  Passing: {row['completions']} completions, {int(row['passing_yards'])} yards, {row['passing_tds']} TDs, {row['interceptions']} INTs"
+                f"  Passing: {row['completions']} completions, "
+                f"{int(row['passing_yards'])} yards, {row['passing_tds']} TDs, "
+                f"{row['interceptions']} INTs"
             )
             print(
                 f"  Attempts: {row['attempts']}, Completion %: {row['completion_percentage']}%"
             )
             print(f"  Rushing: {row['rushing_yards']} yards, {row['rushing_tds']} TDs")
             print(
-                f"  Receiving: {row['targets']} targets, {row['receptions']} receptions, {row['receiving_yards']} yards, {row['receiving_tds']} TDs"
+                f"  Receiving: {row['targets']} targets, {row['receptions']} receptions, "
+                f"{row['receiving_yards']} yards, {row['receiving_tds']} TDs"
             )
             print(
-                f"  Drops: {row['drops']}, Target Share: {row['target_share']}, Air Yards Share: {row['air_yards_share']}"
+                f"  Drops: {row['drops']}, Target Share: {row['target_share']}, "
+                f"Air Yards Share: {row['air_yards_share']}"
             )
             print(
-                f"  Fantasy Points: {row['fantasy_points']}, PPR Points: {row['fantasy_points_ppr']}"
+                f"  Fantasy Points: {row['fantasy_points']}, "
+                f"PPR Points: {row['fantasy_points_ppr']}"
             )
+
             print(
-                f"  Snap Percentage: {row['snap_percentage']}, Drive Participation: {row['drive_participation']}"
+                f"  Snap Percentage: {row['snap_percentage']}, "
+                f"Drive Participation: {row['drive_participation']}"
             )
             print("-" * 40)
+
         print("\n")
 
 

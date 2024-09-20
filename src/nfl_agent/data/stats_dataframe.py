@@ -1,7 +1,7 @@
 # data/stats_dataframes.py
 
+
 import nfl_data_py as nfl
-import pandas as pd
 
 # Define the years for which you want to fetch data
 years = [2024]  # Adjust as needed
@@ -15,7 +15,7 @@ years = [2024]  # Adjust as needed
 weekly_data = nfl.import_weekly_data(years=years)
 
 # Fetch seasonal data
-seasonal_data = nfl.import_seasonal_data(years=years, s_type='ALL')
+seasonal_data = nfl.import_seasonal_data(years=years, s_type="ALL")
 
 # Fetch seasonal rosters
 seasonal_rosters = nfl.import_seasonal_rosters(years=years)
@@ -51,9 +51,9 @@ combine_data = nfl.import_combine_data(years=years)
 ids = nfl.import_ids()
 
 # Fetch NGS data
-ngs_passing = nfl.import_ngs_data(stat_type='passing', years=years)
-ngs_receiving = nfl.import_ngs_data(stat_type='receiving', years=years)
-ngs_rushing = nfl.import_ngs_data(stat_type='rushing', years=years)
+ngs_passing = nfl.import_ngs_data(stat_type="passing", years=years)
+ngs_receiving = nfl.import_ngs_data(stat_type="receiving", years=years)
+ngs_rushing = nfl.import_ngs_data(stat_type="rushing", years=years)
 
 # Fetch depth charts
 depth_charts = nfl.import_depth_charts(years=years)
@@ -62,17 +62,17 @@ depth_charts = nfl.import_depth_charts(years=years)
 injuries = nfl.import_injuries(years=years)
 
 # Fetch QBR data
-qbr_data = nfl.import_qbr(years=years, level='nfl', frequency='season')
+qbr_data = nfl.import_qbr(years=years, level="nfl", frequency="season")
 
 # Fetch PFR seasonal data
-pfr_seasonal_passing = nfl.import_seasonal_pfr(stat_type='pass', years=years)
-pfr_seasonal_rushing = nfl.import_seasonal_pfr(stat_type='rush', years=years)
-pfr_seasonal_receiving = nfl.import_seasonal_pfr(stat_type='rec', years=years)
+pfr_seasonal_passing = nfl.import_seasonal_pfr(stat_type="pass", years=years)
+pfr_seasonal_rushing = nfl.import_seasonal_pfr(stat_type="rush", years=years)
+pfr_seasonal_receiving = nfl.import_seasonal_pfr(stat_type="rec", years=years)
 
 # Fetch PFR weekly data
-pfr_weekly_passing = nfl.import_weekly_pfr(stat_type='pass', years=years)
-pfr_weekly_rushing = nfl.import_weekly_pfr(stat_type='rush', years=years)
-pfr_weekly_receiving = nfl.import_weekly_pfr(stat_type='rec', years=years)
+pfr_weekly_passing = nfl.import_weekly_pfr(stat_type="pass", years=years)
+pfr_weekly_rushing = nfl.import_weekly_pfr(stat_type="rush", years=years)
+pfr_weekly_receiving = nfl.import_weekly_pfr(stat_type="rec", years=years)
 
 # Fetch snap counts
 snap_counts = nfl.import_snap_counts(years=years)
