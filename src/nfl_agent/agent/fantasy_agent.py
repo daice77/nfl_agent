@@ -1,8 +1,8 @@
 import os
 
 from langchain.agents import AgentType, initialize_agent
-from langchain.llms import OpenAI
-from langchain.tools import Tool
+from langchain_community.llms import OpenAI
+from langchain_core.tools import Tool
 from tools.stats_retriever import StatsRetriever
 from tools.team_manager import TeamManager
 from tools.trade_evaluator import TradeEvaluator

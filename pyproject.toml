@@ -26,6 +26,7 @@ langchain-community = "^0.3.0"
 black = "^24.8.0"
 flake8 = "^7.1.1"
 pre-commit = "^3.8.0"
+langchain-cli = "^0.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
