@@ -1,36 +1,50 @@
-import nfl_data_py as nfl
-import pandas as pd
+import sys
 from datetime import datetime
+
+import pandas as pd
+
+import nfl_data_py as nfl
+
+DUMP_COLUMNS = True
+
 
 def fetch_and_save_data(fetch_function, writer, *args, **kwargs):
     """Fetch data, clean it, and save to an Excel file with timestamp.
-       Also checks for changes in data after cleaning and reports differences."""
+    Also checks for changes in data after cleaning and reports differences."""
     try:
         # Fetch the data
         data = fetch_function(*args, **kwargs)
-        
+
         # Count the number of rows in the fetched data
         num_rows_fetched = len(data)
-        
+
         # Clean the data
         cleaned_data = nfl.clean_nfl_data(data)
-        
+
         # Check for differences between original and cleaned data
         differences = data.compare(cleaned_data)
-        
+
         # Save to Excel in a new sheet named after the fetch function
         sheet_name = fetch_function.__name__.replace("import_", "")
         cleaned_data.to_excel(writer, sheet_name=sheet_name, index=False)
-        
+
         print(f"[{fetch_function.__name__}] Number of rows fetched: {num_rows_fetched}")
-        
+        if DUMP_COLUMNS:
+            print(f"\nTABLE DUMP - Columns in {fetch_function}:", file=sys.stderr)
+            for col in cleaned_data.columns:
+                print(
+                    f"Column: {col}, Type: {cleaned_data[col].dtype}, Example Values: {[v for v in cleaned_data[col].unique()[:5]]}",
+                    file=sys.stderr,
+                )
+
         if not differences.empty:
             print("Differences found after cleaning:")
             print(differences)
-        
+
         return cleaned_data
     except Exception as e:
         print(f"Error fetching or saving {fetch_function.__name__}: {e}")
+
 
 # Generate timestamp
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -39,7 +53,7 @@ timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 filename = f"nfl_data_download_{timestamp}.xlsx"
 
 # Create a Pandas Excel writer using XlsxWriter as the engine
-with pd.ExcelWriter(filename, engine='xlsxwriter') as writer:
+with pd.ExcelWriter(filename, engine="xlsxwriter") as writer:
     # Define the years for which you want to fetch data
     years = [2024]
 
@@ -48,7 +62,12 @@ with pd.ExcelWriter(filename, engine='xlsxwriter') as writer:
         fetch_and_save_data(nfl.import_pbp_data, writer, years)
 
     # Fetch and save weekly data
-    fetch_and_save_data(nfl.import_weekly_data, writer, years, columns=[col for col in nfl.see_weekly_cols()])
+    fetch_and_save_data(
+        nfl.import_weekly_data,
+        writer,
+        years,
+        columns=[col for col in nfl.see_weekly_cols()],
+    )
 
     # Fetch and save seasonal data
     fetch_and_save_data(nfl.import_seasonal_data, writer, years, s_type="ALL")

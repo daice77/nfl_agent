@@ -1,5 +1,7 @@
-import nfl_data_py as nfl
 import pandas as pd
+
+import nfl_data_py as nfl
+
 
 def import_and_clean_data(import_func, data_type, *args, **kwargs):
     try:
@@ -8,7 +10,7 @@ def import_and_clean_data(import_func, data_type, *args, **kwargs):
         differences = data.compare(data_cleaned)
 
         if not differences.empty:
-            print(f'{data_type} cleaned these differences: {differences}')
+            print(f"{data_type} cleaned these differences: {differences}")
         print(f"{data_type} imported: {data_cleaned.shape[0]}")
         # Column descriptions
         print(f"Columns in {data_type}:")
@@ -19,7 +21,7 @@ def import_and_clean_data(import_func, data_type, *args, **kwargs):
         return data_cleaned
     except Exception as e:
         print(f"Error importing {data_type}: {e}")
-        return None 
+        return None
 
 
 YEAR = 2024
@@ -27,13 +29,36 @@ YEAR = 2024
 print(f"Available Weekly coplumns: {[col for col in nfl.see_weekly_cols()]}")
 # Weekly data columns for comprehensive reporting
 weekly_columns = [
-    "player_id", "player_name", "player_display_name", "position", "position_group",
-    "recent_team", "season", "week", "opponent_team", "completions", "attempts", 
-    "passing_yards", "passing_tds", "interceptions", "sacks", "carries", "rushing_yards", 
-    "rushing_tds", "receptions", "targets", "receiving_yards", "receiving_tds", 
-    "fantasy_points_ppr", "target_share", "air_yards_share", "wopr"
+    "player_id",
+    "player_name",
+    "player_display_name",
+    "position",
+    "position_group",
+    "recent_team",
+    "season",
+    "week",
+    "opponent_team",
+    "completions",
+    "attempts",
+    "passing_yards",
+    "passing_tds",
+    "interceptions",
+    "sacks",
+    "carries",
+    "rushing_yards",
+    "rushing_tds",
+    "receptions",
+    "targets",
+    "receiving_yards",
+    "receiving_tds",
+    "fantasy_points_ppr",
+    "target_share",
+    "air_yards_share",
+    "wopr",
 ]
-weekly_data = import_and_clean_data(nfl.import_weekly_data, "WeeklyData", [YEAR], columns=weekly_columns)
+weekly_data = import_and_clean_data(
+    nfl.import_weekly_data, "WeeklyData", [YEAR], columns=weekly_columns
+)
 
 # Import and clean data
 players = import_and_clean_data(nfl.import_players, "Players")
