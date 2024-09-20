@@ -1,13 +1,6 @@
-Sure! Below is the Python source code required for your project, along with a `README.md` file to guide you through setting it up.
-
----
-
-
----
-
 # Fantasy Football AI Agent
 
-This project is an AI agent designed to help you manage your fantasy football team. It utilizes LangGraph to integrate various tools, including statistics retrieval, web search for the latest news, team management, trade evaluation, and waiver wire monitoring.
+This project is an AI agent designed to help you manage your fantasy football team. It utilizes LangChain to integrate various tools, including statistics retrieval, web search for the latest news, team management, trade evaluation, and waiver wire monitoring.
 
 ## Table of Contents
 
@@ -31,7 +24,7 @@ This project is an AI agent designed to help you manage your fantasy football te
 ## Requirements
 
 - Python 3.8 or higher
-- [LangGraph](https://github.com/langgraph/langgraph)
+- [LangChain](https://github.com/hwchase17/langchain)
 - Required Python packages (listed in `requirements.txt`)
 
 ## Installation
@@ -60,6 +53,7 @@ This project is an AI agent designed to help you manage your fantasy football te
 
 1. **API Keys**
 
+   - **OpenAI API Key**: Sign up for an OpenAI account and obtain an API key.
    - **Web Search Tool**: Sign up for the AI-powered search service (e.g., [Perplexity AI](https://www.perplexity.ai/)) and obtain an API key.
    - **Team Management Tool**: Ensure you have access to the CBS Sports API and obtain necessary credentials.
 
@@ -68,6 +62,7 @@ This project is an AI agent designed to help you manage your fantasy football te
    Create a `.env` file in the root directory with the following:
 
    ```dotenv
+   OPENAI_API_KEY=your_openai_api_key
    AI_SEARCH_API_KEY=your_ai_search_api_key
    CBS_API_KEY=your_cbs_api_key
    CBS_USERNAME=your_cbs_username
@@ -84,29 +79,33 @@ python main.py
 
 ## Tools
 
-- **Stats Retriever (`stats_retriever.py`)**
+- **Fantasy Agent (`agent/fantasy_agent.py`)**
+
+  Implements the AI agent using LangChain, integrating all tools and providing a natural language interface.
+
+- **Stats Retriever (`tools/stats_retriever.py`)**
 
   Retrieves and processes player statistics from the provided data frames.
 
-- **Web Search (`web_search.py`)**
+- **Web Search (`tools/web_search.py`)**
 
   Uses an AI-powered search service to fetch the latest news on players.
 
-- **Team Manager (`team_manager.py`)**
+- **Team Manager (`tools/team_manager.py`)**
 
   Interacts with the CBS Sports API to manage your team roster.
 
-- **Trade Evaluator (`trade_evaluator.py`)**
+- **Trade Evaluator (`tools/trade_evaluator.py`)**
 
   Analyzes potential trades based on player performance and projections.
 
-- **Waiver Wire Monitor (`waiver_wire.py`)**
+- **Waiver Wire Monitor (`tools/waiver_wire.py`)**
 
   Checks for available players and places waiver claims when necessary.
 
 ## Data
 
-- **Stats DataFrames (`stats_dataframes.py`)**
+- **Stats DataFrames (`data/stats_dataframes.py`)**
 
   Contains the data frames with player statistics and other relevant data.
 
