@@ -1,4 +1,6 @@
-numpy<2
-pandas
-nfl_data_py
-openpyxl
+appdirs
+fastparquet; python_version >= '3.7'
+fastparquet==0.7.2; python_version <= '3.6'
+numpy>=1.0,<2.0
+pandas>=1.0,<2.0
+XlsxWriter
