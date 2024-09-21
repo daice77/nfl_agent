@@ -1,10 +1,11 @@
 import os
 
-from langchain.agents import AgentType, initialize_agent
-from langchain_community.llms import OpenAI
+from langchain.agents import create_react_agent
 from langchain_core.tools import Tool
+from langchain_openai import OpenAI
 from tools.stats_retriever import StatsRetriever
-from tools.team_manager import TeamManager
+
+# from tools.team_manager import TeamManager
 from tools.trade_evaluator import TradeEvaluator
 from tools.waiver_wire import WaiverWire
 from tools.web_search import WebSearch
@@ -15,11 +16,11 @@ class FantasyFootballAgent:
         # Initialize tools
         self.stats_retriever = StatsRetriever()
         self.web_search = WebSearch(api_key=os.getenv("AI_SEARCH_API_KEY"))
-        self.team_manager = TeamManager(
-            api_key=os.getenv("CBS_API_KEY"),
-            username=os.getenv("CBS_USERNAME"),
-            password=os.getenv("CBS_PASSWORD"),
-        )
+        # self.team_manager = TeamManager(
+        #     api_key=os.getenv("CBS_API_KEY"),
+        #     username=os.getenv("CBS_USERNAME"),
+        #     password=os.getenv("CBS_PASSWORD"),
+        # )
         self.trade_evaluator = TradeEvaluator()
         self.waiver_wire = WaiverWire()
 
@@ -35,11 +36,11 @@ class FantasyFootballAgent:
                 func=self.web_search.search,
                 description="Use this to search for the latest news about players.",
             ),
-            Tool(
-                name="ManageTeam",
-                func=self.team_manager.manage_team,
-                description="Use this to manage your team roster.",
-            ),
+            # Tool(
+            #     name="ManageTeam",
+            #     func=self.team_manager.manage_team,
+            #     description="Use this to manage your team roster.",
+            # ),
             Tool(
                 name="EvaluateTrade",
                 func=self.trade_evaluator.evaluate_trade,
@@ -60,11 +61,10 @@ class FantasyFootballAgent:
             ),  # Ensure you have set this environment variable
         )
 
-        # Initialize the agent with the tools
-        self.agent = initialize_agent(
+        # Initialize the agent with the tools using the new method
+        self.agent = create_react_agent(
             tools=tools,
             llm=llm,
-            agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
             verbose=True,
         )
 

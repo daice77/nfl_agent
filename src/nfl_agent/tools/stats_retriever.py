@@ -1,5 +1,5 @@
 import pandas as pd
-from data.stats_dataframes import (  # Include any other data frames you need
+from data.stats_dataframes import (
     combine_data,
     depth_charts,
     draft_picks,

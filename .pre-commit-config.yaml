@@ -26,7 +26,7 @@ repos:
     rev: v2.12
     hooks:
       - id: vulture
-        args: [src, prototyping]
+        args: ['--exclude', 'src/nfl_agent/tools/team_manager.py,tests/test_team_manager.py', 'src', 'prototyping', 'tests']
 
   - repo: https://github.com/pycqa/flake8
     rev: 7.1.1

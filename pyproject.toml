@@ -21,6 +21,8 @@ pandas = ">=1.0,<2.0"
 XlsxWriter = "*"
 langchain = "*"
 langchain-community = "*"
+openai = "^1.47.0"
+langchain-openai = "^0.2.0"
 
 [tool.poetry.dev-dependencies]
 black = "*"
