@@ -11,7 +11,6 @@ packages = [
 [tool.poetry.scripts]
 nfl_agent = "nfl_agent.main:main"
 
-
 [tool.poetry.dependencies]
 python = "^3.12"
 appdirs = "*"
@@ -23,6 +22,9 @@ langchain = "*"
 langchain-community = "*"
 openai = "^1.47.0"
 langchain-openai = "^0.2.0"
+langgraph = "^0.2.23"
+tqdm = "^4.66.5"
+joblib = "^1.4.2"
 
 [tool.poetry.dev-dependencies]
 black = "*"
@@ -39,7 +41,7 @@ max-line-length = 99
 target-version = ['py312']
 
 [tool.flake8]
-max-line-length = 99
+max-line-length = 199
 extend-ignore = ["E203", "W503"]
 
 [tool.isort]

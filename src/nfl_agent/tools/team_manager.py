@@ -7,7 +7,9 @@ class TeamManager:
         self.session = requests.Session()
         self.username = username
         self.password = password
-        self.base_url = "https://api.cbssports.com/fantasy"
+        self.base_url = (
+            "https://internationalfantasyfootballleag.football.cbssports.com/"
+        )
 
         self.authenticate()
 
@@ -17,7 +19,7 @@ class TeamManager:
         payload = {
             "userid": self.username,
             "password": self.password,
-            "api_token": self.api_key,
+            # "api_token": self.api_key,
         }
         response = self.session.post(auth_url, data=payload)
         if response.status_code != 200:

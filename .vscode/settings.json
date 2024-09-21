@@ -1,4 +1,4 @@
 {
-    "CodeGPT.apiKey": "CodeGPT Plus Beta",
     "python.pythonPath": "/Users/daice/dev/nfl_agent/src/nfl_agent",
+    "python.envFile": "${workspaceFolder}/.env"
 }
