@@ -1,7 +1,7 @@
 import logging
 import os
 import uuid
-from typing import Annotated, Optional
+from typing import Annotated, Literal, Optional
 
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
@@ -20,21 +20,21 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-# def update_dialog_stack(left: list[str], right: Optional[str]) -> list[str]:
-#     if right is None:
-#         return left
-#     if right == "pop":
-#         return left[:-1]
-#     return left + [right]
+def update_dialog_stack(left: list[str], right: Optional[str]) -> list[str]:
+    if right is None:
+        return left
+    if right == "pop":
+        return left[:-1]
+    return left + [right]
 
 
 class State(TypedDict):
     messages: Annotated[list[AnyMessage], add_messages]
     user_info: str
-    # dialog_state: Annotated[
-    #     list[Literal["main_assistant", "stats", "news", "trade", "waiver", "team"]],
-    #     update_dialog_stack,
-    # ]
+    dialog_state: Annotated[  # noqa: F841
+        list[Literal["main_assistant", "stats", "news", "trade", "waiver", "team"]],
+        update_dialog_stack,
+    ]
 
 
 # Initialize tools
@@ -280,6 +280,9 @@ class Assistant:
                     )
                     messages.append(AIMessage(content=interpretation_content))
 
+            # Log the dialog state to make its usage explicit
+            logger.info(f"Current dialog state: {state['dialog_state']}")
+
             state["messages"] = messages
             return state
         except Exception as e:
@@ -343,22 +346,27 @@ def route_intent(state: State):
             for keyword in ["statistics", "stats", "numbers", "performance"]
         ):
             state["dialog_state"].append("stats")
+            logger.info(f"Dialog state updated: {state['dialog_state']}")
             return "stats_assistant"
         elif any(
             keyword in content for keyword in ["news", "update", "latest", "injury"]
         ):
             state["dialog_state"].append("news")
+            logger.info(f"Dialog state updated: {state['dialog_state']}")
             return "news_assistant"
         elif any(keyword in content for keyword in ["trade", "exchange", "deal"]):
             state["dialog_state"].append("trade")
+            logger.info(f"Dialog state updated: {state['dialog_state']}")
             return "trade_assistant"
         elif any(keyword in content for keyword in ["waiver", "free agent", "pickup"]):
             state["dialog_state"].append("waiver")
+            logger.info(f"Dialog state updated: {state['dialog_state']}")
             return "waiver_assistant"
         elif any(
             keyword in content for keyword in ["manage", "roster", "lineup", "team"]
         ):
             state["dialog_state"].append("team")
+            logger.info(f"Dialog state updated: {state['dialog_state']}")
             return "team_management_assistant"
     return END
 
@@ -431,5 +439,15 @@ class FantasyFootballAgent:
 if __name__ == "__main__":
     agent = FantasyFootballAgent()
     user_question = "Who should I start this week, Player A or Player B?"
+
+    # Initialize the state with dialog_state
+    initial_state = {
+        "messages": [HumanMessage(content=user_question)],
+        "user_info": "User",
+        "dialog_state": ["main_assistant"],
+    }
+
+    print(initial_state)
+
     response = agent.run(user_question)
     print(response)
