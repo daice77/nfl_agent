@@ -1,13 +1,16 @@
 # main.py
 
 import logging
+import os
 import uuid
 
 from agent.fantasy_agent import FantasyFootballAgent
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv(find_dotenv(), verbose=True)
+print("OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
+
 
 # Set up logging
 logging.basicConfig(

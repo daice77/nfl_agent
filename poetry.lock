@@ -149,13 +149,13 @@ files = [
 
 [[package]]
 name = "anyio"
-version = "4.5.0"
+version = "4.6.0"
 description = "High level compatibility layer for multiple asynchronous event loop implementations"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "anyio-4.5.0-py3-none-any.whl", hash = "sha256:fdeb095b7cc5a5563175eedd926ec4ae55413bb4be5770c424af0ba46ccb4a78"},
-    {file = "anyio-4.5.0.tar.gz", hash = "sha256:c5a275fe5ca0afd788001f58fca1e69e29ce706d746e317d660e21f70c530ef9"},
+    {file = "anyio-4.6.0-py3-none-any.whl", hash = "sha256:c7d2e9d63e31599eeb636c8c5c03a7e108d73b345f064f1c19fdc87b79036a9a"},
+    {file = "anyio-4.6.0.tar.gz", hash = "sha256:137b4559cbb034c477165047febb6ff83f390fc3b20bf181c1fc0a728cb8beeb"},
 ]
 
 [package.dependencies]
@@ -885,13 +885,13 @@ test = ["objgraph", "psutil"]
 
 [[package]]
 name = "gritql"
-version = "0.1.4"
+version = "0.1.5"
 description = "Python bindings for GritQL"
 optional = false
-python-versions = "<4.0,>=3.8"
+python-versions = "*"
 files = [
-    {file = "gritql-0.1.4-py3-none-any.whl", hash = "sha256:6e9f8c638bbf3dda58222832c976c716a1ca02a920e7549df58bf1a0bb9ebeef"},
-    {file = "gritql-0.1.4.tar.gz", hash = "sha256:487d0c1a98cb17cc9681121e53ac15f39e1cb87c4317a2ca1872e33d3d3a0a47"},
+    {file = "gritql-0.1.5-py2.py3-none-any.whl", hash = "sha256:b17b314d995a11b8e06839280b079ffc8a30bdfb0d2beebcb4332186a0b2cdf0"},
+    {file = "gritql-0.1.5.tar.gz", hash = "sha256:7568ee2d7c7457000374c91289bacb05e92524c77a5d5f63fe777b29622bff4c"},
 ]
 
 [[package]]

@@ -3,6 +3,7 @@ import os
 import uuid
 from typing import Annotated, Literal, Optional
 
+from dotenv import find_dotenv, load_dotenv
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import Tool
@@ -15,6 +16,9 @@ from tools.trade_evaluator import TradeEvaluator
 from tools.waiver_wire import WaiverWire
 from tools.web_search import WebSearch
 from typing_extensions import TypedDict
+
+# Load environment variables from .env file
+load_dotenv(find_dotenv(), verbose=True)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -247,7 +251,13 @@ class Assistant:
 
             logger.info(f"{self.name} received input: {user_input}")
 
-            response = llm.invoke([{"role": "user", "content": prompt}])
+            try:
+                response = llm.invoke([{"role": "user", "content": prompt}])
+            except Exception as e:
+                logger.error(
+                    f"Error invoking LLM in {self.name}: {str(e)}", exc_info=False
+                )
+                return state
             if isinstance(response, AIMessage):
                 ai_content = response.content
             else:
